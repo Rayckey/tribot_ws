@@ -1,0 +1,10 @@
+<launch>
+    <arg name="gui" default="False" />
+    <!-- <param name="robot_description" textfile="$(find tribot)/urdf/world.xacro" /> -->
+    <param name="robot_description" command="xacro  '$(find tribot)/urdf/world.xacro'"/>
+    <param name="use_gui" value="$(arg gui)"/>
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" unless="$(arg use_gui)"/>
+    <node name="joint_state_publisher" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" if="$(arg use_gui)"/>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen" />
+    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find tribot)/view.rviz" />
+</launch>
