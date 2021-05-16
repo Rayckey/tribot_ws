@@ -1,0 +1,19 @@
+controller_list:
+  - name: fake_back_leg_controller
+    joints:
+      - hip_back_joint
+      - leg_back_joint
+      - foot_back_joint
+  - name: fake_left_leg_controller
+    joints:
+      - hip_left_joint
+      - leg_left_joint
+      - foot_left_joint
+  - name: fake_right_leg_controller
+    joints:
+      - hip_right_joint
+      - leg_right_joint
+      - foot_right_joint
+initial:  # Define initial robot poses.
+#  - group: back_leg
+#    pose: home

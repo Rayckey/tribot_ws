@@ -1,0 +1,167 @@
+# Simulation settings for using moveit_sim_controllers
+moveit_sim_hw_interface:
+  joint_model_group: todo_group_name
+  joint_model_group_pose: todo_state_name
+# Settings for ros_control_boilerplate control loop
+generic_hw_control_loop:
+  loop_hz: 300
+  cycle_time_error_threshold: 0.01
+# Settings for ros_control hardware interface
+hardware_interface:
+  joints:
+    - hip_back_joint
+    - leg_back_joint
+    - foot_back_joint
+    - hip_left_joint
+    - leg_left_joint
+    - foot_left_joint
+    - hip_right_joint
+    - leg_right_joint
+    - foot_right_joint
+  sim_control_mode: 1  # 0: position, 1: velocity
+# Publish all joint states
+# Creates the /joint_states topic necessary in ROS
+joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: 50
+controller_list:
+  - name: back_leg_controller
+    action_ns: follow_joint_trajectory
+    default: True
+    type: FollowJointTrajectory
+    joints:
+      - hip_back_joint
+      - leg_back_joint
+      - foot_back_joint
+  - name: left_leg_controller
+    action_ns: follow_joint_trajectory
+    default: True
+    type: FollowJointTrajectory
+    joints:
+      - hip_left_joint
+      - leg_left_joint
+      - foot_left_joint
+  - name: right_leg_controller
+    action_ns: follow_joint_trajectory
+    default: True
+    type: FollowJointTrajectory
+    joints:
+      - hip_right_joint
+      - leg_right_joint
+      - foot_right_joint
+effort_pos_controller:
+  type: effort_controllers/JointPositionController
+  joints:
+    - hip_back_joint
+    - leg_back_joint
+    - foot_back_joint
+    - hip_left_joint
+    - leg_left_joint
+    - foot_left_joint
+    - hip_right_joint
+    - leg_right_joint
+    - foot_right_joint
+  gains:
+    hip_back_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    leg_back_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    foot_back_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    hip_left_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    leg_left_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    foot_left_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    hip_right_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    leg_right_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    foot_right_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+effort_effort_controller:
+  type: effort_controllers/JointEffortController
+  joints:
+    - hip_back_joint
+    - leg_back_joint
+    - foot_back_joint
+    - hip_left_joint
+    - leg_left_joint
+    - foot_left_joint
+    - hip_right_joint
+    - leg_right_joint
+    - foot_right_joint
+  gains:
+    hip_back_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    leg_back_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    foot_back_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    hip_left_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    leg_left_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    foot_left_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    hip_right_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    leg_right_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    foot_right_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
