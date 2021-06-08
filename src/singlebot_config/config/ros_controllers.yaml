@@ -1,0 +1,57 @@
+singlebot:
+joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: 50
+controller_list:
+  - name: leg_controller
+    action_ns: follow_joint_trajectory
+    default: True
+    type: FollowJointTrajectory
+    joints:
+      - hip_back_joint
+      - leg_back_joint
+      - foot_back_joint
+position_controller:
+  type: effort_controllers/JointPositionController
+  joints:
+    - hip_back_joint
+    - leg_back_joint
+    - foot_back_joint
+  gains:
+    hip_back_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    leg_back_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    foot_back_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+effort_controller:
+  type: effort_controllers/JointEffortController
+  joints:
+    - hip_back_joint
+    - leg_back_joint
+    - foot_back_joint
+  gains:
+    hip_back_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    leg_back_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    foot_back_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1

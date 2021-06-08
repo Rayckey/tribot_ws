@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<robot xmlns:xacro="http:/ros.org/wiki/xacro" name="single_world">
+
+    <!-- <link name="world"  /> -->
+
+    <xacro:include filename="$(find tribot)/urdf/singlebot.xacro" />
+    <xacro:single base_radius="0.3" base_length="0.2" hip_radius="0.05" leg_length="0.3" />
+
+</robot>

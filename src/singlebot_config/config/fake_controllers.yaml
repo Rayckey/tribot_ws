@@ -1,0 +1,6 @@
+controller_list:
+  - name: fake_leg_controller
+    joints:
+      - hip_back_joint
+      - leg_back_joint
+      - foot_back_joint

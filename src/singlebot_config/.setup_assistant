@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: tribot
+    relative_path: urdf/singleworld.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/world.srdf
+  CONFIG:
+    author_name: rocky
+    author_email: rocky_wang@live.com
+    generated_timestamp: 1623186456

@@ -1,0 +1,13 @@
+<launch>
+    <arg name="gui" default="False" />
+
+    <param name="robot_description" command="xacro  '$(find singlebot_config)/urdf/singlebot.urdf'"/>
+
+      <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="paused" value="true"/>
+      </include>
+
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-file $(find singlebot_config)/urdf/singlebot.urdf -urdf -z 1 -model singlebot" />
+
+
+</launch>
