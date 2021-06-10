@@ -101,28 +101,28 @@
             <izz>0.1</izz>
           </inertia>
         </inertial>
-        <collision name='base_link_collision'>
+        <collision name='base_link_fixed_joint_lump__robot_base_collision'>
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <sphere>
               <radius>0.3</radius>
             </sphere>
           </geometry>
-          <max_contacts>10</max_contacts>
           <surface>
             <contact>
               <ode/>
             </contact>
-            <bounce/>
             <friction>
+              <ode/>
               <torsional>
                 <ode/>
               </torsional>
-              <ode/>
             </friction>
+            <bounce/>
           </surface>
+          <max_contacts>10</max_contacts>
         </collision>
-        <visual name='base_link_visual'>
+        <visual name='base_link_fixed_joint_lump__robot_base_visual'>
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <sphere>
@@ -130,6 +130,28 @@
             </sphere>
           </geometry>
         </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <gravity>1</gravity>
+        <sensor name='imu_sensor' type='imu'>
+          <always_on>1</always_on>
+          <update_rate>100</update_rate>
+          <visualize>1</visualize>
+          <topic>__default_topic__</topic>
+          <plugin name='imu_plugin' filename='libgazebo_ros_imu_sensor.so'>
+            <topicName>imu</topicName>
+            <bodyName>robot_base</bodyName>
+            <updateRateHZ>1000.0</updateRateHZ>
+            <gaussianNoise>0.0</gaussianNoise>
+            <xyzOffset>0 0 0</xyzOffset>
+            <rpyOffset>0 0 0</rpyOffset>
+            <frameName>robot_base</frameName>
+            <initialOrientationAsReference>0</initialOrientationAsReference>
+            <robotNamespace>/</robotNamespace>
+          </plugin>
+          <pose>0 0 0 0 -0 0</pose>
+          <imu/>
+        </sensor>
         <self_collide>0</self_collide>
         <enable_wind>0</enable_wind>
         <kinematic>0</kinematic>
@@ -298,8 +320,8 @@
         <axis>
           <xyz>0 0 1</xyz>
           <limit>
-            <lower>-0.1</lower>
-            <upper>0.2</upper>
+            <lower>-0.3</lower>
+            <upper>0.3</upper>
             <effort>20</effort>
             <velocity>1</velocity>
           </limit>
@@ -331,21 +353,21 @@
               <radius>0.05</radius>
             </cylinder>
           </geometry>
-          <max_contacts>10</max_contacts>
           <surface>
             <contact>
               <ode/>
             </contact>
-            <bounce/>
             <friction>
+              <ode/>
               <torsional>
                 <ode/>
               </torsional>
-              <ode/>
             </friction>
+            <bounce/>
           </surface>
+          <max_contacts>10</max_contacts>
         </collision>
-        <collision name='foot_back_collision_1'>
+        <collision name='foot_back_fixed_joint_lump__foot_collision_collision_1'>
           <pose>0 0 0.3 0 -0 0</pose>
           <geometry>
             <sphere>
@@ -383,21 +405,36 @@
             </sphere>
           </geometry>
         </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <sensor name='foot_contact_sensor' type='contact'>
+          <contact>
+            <collision>foot_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+          <plugin name='foot_back_plugin' filename='libgazebo_ros_bumper.so'>
+            <alwaysOn>1</alwaysOn>
+            <bumperTopicName>/foot_back_contact</bumperTopicName>
+            <frameName>world</frameName>
+            <updateRate>100.0</updateRate>
+            <robotNamespace>/</robotNamespace>
+          </plugin>
+        </sensor>
         <self_collide>0</self_collide>
         <enable_wind>0</enable_wind>
         <kinematic>0</kinematic>
       </link>
       <static>0</static>
       <plugin name='gazebo_ros_control' filename='libgazebo_ros_control.so'>
-        <robotNamespace>/</robotNamespace>
+        <robotNamespace>/singlebot</robotNamespace>
       </plugin>
       <pose>0 0 1 0 -0 0</pose>
     </model>
     <state world_name='default'>
-      <sim_time>0 0</sim_time>
-      <real_time>0 0</real_time>
-      <wall_time>1623185230 278734839</wall_time>
-      <iterations>0</iterations>
+      <sim_time>14 923000000</sim_time>
+      <real_time>15 139940699</real_time>
+      <wall_time>1623285302 506024706</wall_time>
+      <iterations>14923</iterations>
       <model name='ground_plane'>
         <pose>0 0 0 0 -0 0</pose>
         <scale>1 1 1</scale>
@@ -409,31 +446,31 @@
         </link>
       </model>
       <model name='singlebot'>
-        <pose>0 0 1 0 -0 0</pose>
+        <pose>-0.610558 -0.016982 0.3 0.078258 -1.27136 -0.054781</pose>
         <scale>1 1 1</scale>
         <link name='base_link'>
-          <pose>0 0 1 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
+          <pose>-0.610558 -0.016982 0.3 0.078258 -1.27136 -0.054781</pose>
+          <velocity>-7e-06 0.000251 0 -0.000837 -2.3e-05 0</velocity>
+          <acceleration>-1e-06 2.5e-05 0 -8.3e-05 -2e-06 0</acceleration>
+          <wrench>-2e-06 7.5e-05 0 0 -0 0</wrench>
         </link>
         <link name='foot_back'>
-          <pose>2.8e-05 1e-06 0.4 3.14159 9.3e-05 3.14159</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
+          <pose>-0.081035 -0.002638 0.137595 3.06276 1.27354 3.08622</pose>
+          <velocity>-3e-06 0.000115 -0 -0.000837 -2.3e-05 0</velocity>
+          <acceleration>-0 8e-06 -0 -8.3e-05 -2e-06 0</acceleration>
+          <wrench>-0 2e-06 -0 0 -0 0</wrench>
         </link>
         <link name='hip_back'>
-          <pose>0 0 0.7 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
+          <pose>-0.323929 -0.00921 0.211775 0.078259 -1.27136 -0.054782</pose>
+          <velocity>-5e-06 0.000177 -0 -0.000837 -2.3e-05 0</velocity>
+          <acceleration>-0 1.8e-05 -0 -8.3e-05 -2e-06 0</acceleration>
+          <wrench>-0 5e-06 -0 0 -0 0</wrench>
         </link>
         <link name='leg_back'>
-          <pose>0 0 0.7 3.14159 9.3e-05 3.14159</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
+          <pose>-0.323929 -0.00921 0.211775 3.06276 1.27354 3.08622</pose>
+          <velocity>-5e-06 0.000177 -0 -0.000837 -2.3e-05 0</velocity>
+          <acceleration>-0 1.4e-05 -0 -8.3e-05 -2e-06 0</acceleration>
+          <wrench>-0 4e-06 -0 0 -0 0</wrench>
         </link>
       </model>
       <light name='sun'>
@@ -442,7 +479,7 @@
     </state>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose>4.90655 -4.83328 2.65042 0 0.275643 2.35619</pose>
+        <pose>5.03554 -4.7933 2.42792 0 0.275643 2.35619</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>

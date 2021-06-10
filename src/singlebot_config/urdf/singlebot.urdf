@@ -218,16 +218,16 @@
 
 
     <!-- Contact Sensor -->
-    <gazebo >
+    <gazebo reference="foot_back">
         <sensor name="foot_contact_sensor" type="contact">
-            <always_on>true</always_on>
-            <updateRate>100.0</updateRate>
+            <!-- <always_on>true</always_on> -->
+            <!-- <updateRate>100.0</updateRate> -->
             <contact>
-                <collision>foot_collision</collision>
+                <collision>foot_back_fixed_joint_lump__foot_collision_collision_1</collision>
             </contact>
             <plugin name="foot_back_plugin" filename="libgazebo_ros_bumper.so">
                 <alwaysOn>true</alwaysOn>
-                <bumperTopicName>foot_back_contact</bumperTopicName>
+                <bumperTopicName>/foot_back_contact</bumperTopicName>
                 <frameName>world</frameName>
                 <updateRate>100.0</updateRate>
             </plugin>
