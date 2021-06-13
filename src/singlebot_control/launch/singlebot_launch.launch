@@ -1,0 +1,7 @@
+<launch>
+
+  <include file="$(find singlebot_config)/launch/view_gazebo_control.launch" />
+
+  <include file="$(find singlebot_control)/launch/singlebot_effort_control.launch" />
+
+</launch>
