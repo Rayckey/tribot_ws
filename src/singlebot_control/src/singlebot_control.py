@@ -35,15 +35,15 @@ class SpringLoadedInvertedPendulum():
 
 
         # setup joint parameters
-        self.k1 = 10
-        self.d1 = 1
-        self.k2 = 10
-        self.d2 = 1
+        self.k1 = 50
+        self.d1 = 5
+        self.k2 = 50
+        self.d2 = 5
         self.d3 = 10
 
         # set up SLIP parameters
         self.f = 1.0 # frequency
-        self.m = 3 + 0.3 + 0.3 + 0.3
+        self.m = 3 + 0.3 + 0.3 + 0.3 + 0.1
         self.k3 = (2*math.pi*self.f)**2 * self.m # needed spring constant
         print("k is " , self.k3 )
         self.Ts = math.pi*math.sqrt(self.m/self.k3)
@@ -110,7 +110,7 @@ class SpringLoadedInvertedPendulum():
 
     def subState(self, data):
         for i in range(len(data.name)):
-            if data.name[i] == 'singlebot::base_link':
+            if data.name[i] == 'singlebot::robot_base':
                 self.pos[0] = data.pose[i].position.x
                 self.pos[1] = data.pose[i].position.y
                 self.pos[2] = data.pose[i].position.z

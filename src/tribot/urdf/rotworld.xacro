@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<robot xmlns:xacro="http:/ros.org/wiki/xacro" name="rotworld">
+
+    <link name="world"  />
+
+    <xacro:include filename="$(find tribot)/urdf/singlerot.xacro" />
+
+</robot>
