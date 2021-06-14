@@ -23,6 +23,27 @@
                 <color rgba="1 1 1 1" />
             </material>
         </visual>
+
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0.3" />
+            <geometry>
+                <sphere radius="0.1" />
+            </geometry>
+            <material name="framemat1">
+                <color rgba="1 0.2 0.2 1" />
+            </material>
+        </visual>
+
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0.3 0" />
+            <geometry>
+                <sphere radius="0.1" />
+            </geometry>
+            <material name="framemat1">
+                <color rgba="1 0.2 0.2 1" />
+            </material>
+        </visual>
+
         <collision>
             <origin rpy="0 0 0" xyz="0 0 0" />
             <geometry>
@@ -35,7 +56,7 @@
         <inertial>
             <origin rpy="0 0 0" xyz="0 0 0" />
             <mass value="0.3" />
-            <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1" />
+            <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05" />
         </inertial>
 
         <visual>
@@ -59,7 +80,7 @@
         <inertial>
             <origin rpy="0 0 0" xyz="0 0 0.3" />
             <mass value="0.3" />
-            <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1" />
+            <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
         </inertial>
 
         <visual>
@@ -98,7 +119,7 @@
         <inertial>
             <origin rpy="0 0 0" xyz="0 0 0.3" />
             <mass value="0.3" />
-            <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1" />
+            <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
         </inertial>
 
         <visual>
@@ -138,19 +159,21 @@
         <child link="hip_back" />
         <origin rpy="0 0 0" xyz="0 0 0" />
         <axis xyz="0 0 1" />
+        <!-- <limit effort="10000" lower="-9" upper="9" velocity="100.0" /> -->
     </joint>
     <joint name="leg_back_joint" type="continuous">
         <parent link="hip_back" />
         <child link="leg_back" />
         <origin rpy="0 3.1415 0" xyz="0 0 0" />
-        <axis xyz="0 1 0" />
+        <axis xyz="0 -1 0" />
+        <!-- <limit effort="10000" lower="-9" upper="9" velocity="100.0" /> -->
     </joint>
     <joint name="foot_back_joint" type="prismatic">
         <parent link="leg_back" />
         <child link="foot_back" />
         <origin rpy="0 0 0" xyz="0 0 0.6" />
         <axis xyz="0 0 1" />
-        <limit effort="100" lower="-1.0" upper="1.0" velocity="100.0" />
+        <limit effort="10000" lower="-1.0" upper="1.0" velocity="100.0" />
     </joint>
     <joint name="base_joint" type="fixed">
         <parent link="base_link" />
@@ -240,8 +263,8 @@
             <surface>
                 <friction>
                     <ode>
-                        <mu>0.99</mu>
-                        <mu2>0.99</mu2>
+                        <mu>0.9</mu>
+                        <mu2>0.9</mu2>
                     </ode>
                 </friction>
             </surface>
