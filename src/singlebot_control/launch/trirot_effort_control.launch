@@ -1,0 +1,14 @@
+<launch>
+
+  <!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find singlebot_control)/config/effort_control.yaml" command="load"/>
+
+  <!-- load the controllers -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/singlebot" args="joint1_back_effort_controller joint2_back_effort_controller joint3_back_effort_controller joint1_left_effort_controller joint2_left_effort_controller joint3_left_effort_controller joint1_right_effort_controller joint2_right_effort_controller joint3_right_effort_controller joint_state_controller"/>
+
+  <!-- convert joint states to TF transforms for rviz, etc -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+    <remap from="/joint_states" to="/singlebot/joint_states" />
+  </node>
+
+</launch>

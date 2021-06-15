@@ -3,16 +3,40 @@ singlebot:
     type: joint_state_controller/JointStateController
     publish_rate: 1000
 
-      # Position Controllers ---------------------------------------
-  joint1_effort_controller:
+
+  joint1_back_effort_controller:
     type: effort_controllers/JointEffortController
     joint: hip_back_joint
     pid: {p: 100.0, i: 0.00, d: 10.0}
-  joint2_effort_controller:
+  joint2_back_effort_controller:
     type: effort_controllers/JointEffortController
     joint: leg_back_joint
     pid: {p: 100.0, i: 0.00, d: 10.0}
-  joint3_effort_controller:
+  joint3_back_effort_controller:
     type: effort_controllers/JointEffortController
     joint: foot_back_joint
+    pid: {p: 142.12230337568676, i: 0.00, d: 0.0}
+  joint1_left_effort_controller:
+    type: effort_controllers/JointEffortController
+    joint: hip_left_joint
+    pid: {p: 100.0, i: 0.00, d: 10.0}
+  joint2_left_effort_controller:
+    type: effort_controllers/JointEffortController
+    joint: leg_left_joint
+    pid: {p: 100.0, i: 0.00, d: 10.0}
+  joint3_left_effort_controller:
+    type: effort_controllers/JointEffortController
+    joint: foot_left_joint
+    pid: {p: 142.12230337568676, i: 0.00, d: 0.0}
+  joint1_right_effort_controller:
+    type: effort_controllers/JointEffortController
+    joint: hip_right_joint
+    pid: {p: 100.0, i: 0.00, d: 10.0}
+  joint2_right_effort_controller:
+    type: effort_controllers/JointEffortController
+    joint: leg_right_joint
+    pid: {p: 100.0, i: 0.00, d: 10.0}
+  joint3_right_effort_controller:
+    type: effort_controllers/JointEffortController
+    joint: foot_right_joint
     pid: {p: 142.12230337568676, i: 0.00, d: 0.0}
