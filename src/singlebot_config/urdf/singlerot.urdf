@@ -16,7 +16,7 @@
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
-                <sphere radius="0.05" />
+                <sphere radius="0.02" />
             </geometry>
             <material name="framemat0">
                 <color rgba="1 1 1 1" />
@@ -33,7 +33,7 @@
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
-                <sphere radius="0.05" />
+                <sphere radius="0.02" />
             </geometry>
             <material name="framemat0">
                 <color rgba="1 1 1 1" />
@@ -51,7 +51,7 @@
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
-                <sphere radius="0.05" />
+                <sphere radius="0.02" />
             </geometry>
             <material name="framemat0">
                 <color rgba="1 1 1 1" />
@@ -110,7 +110,7 @@
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
-                <sphere radius="0.05" />
+                <sphere radius="0.02" />
             </geometry>
             <material name="framemat0">
                 <color rgba="1 1 1 1" />
@@ -119,45 +119,45 @@
         <collision>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
-                <sphere radius="0.05" />
+                <sphere radius="0.02" />
             </geometry>
         </collision>
     </link>
 
     <link name="leg_back">
         <inertial>
-            <origin rpy="0 0 0" xyz="0 0 0.3" />
+            <origin rpy="0 0 0" xyz="0 0 0" />
             <mass value="0.3"/>
-            <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+            <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05" />
         </inertial>
         <visual>
-            <origin rpy="0 0 0" xyz="0 0 0.3" />
+            <origin rpy="0 0 0" xyz="0 0 0.15" />
             <geometry>
-                <cylinder length="0.6" radius="0.05" />
+                <cylinder length="0.3" radius="0.02" />
             </geometry>
             <material name="framemat0">
                 <color rgba="1 1 1 1" />
             </material>
         </visual>
         <collision>
-            <origin rpy="0 0 0" xyz="0 0 0.3" />
+            <origin rpy="0 0 0" xyz="0 0 0.15" />
             <geometry>
-                <cylinder length="0.6" radius="0.05" />
+                <cylinder length="0.3" radius="0.02" />
             </geometry>
         </collision>
         <visual>
-            <origin rpy="0 0 0" xyz="0 0 0.6" />
+            <origin rpy="0 0 0" xyz="0 0 0.3" />
             <geometry>
-                <sphere radius="0.05"/>
+                <sphere radius="0.02"/>
             </geometry>
             <material name="framemat0">
                 <color rgba="1 1 1 1" />
             </material>
         </visual>
         <collision>
-            <origin rpy="0 0 0" xyz="0 0 0.6" />
+            <origin rpy="0 0 0" xyz="0 0 0.3" />
             <geometry>
-                <sphere radius="0.05"/>
+                <sphere radius="0.02"/>
             </geometry>
         </collision>
     </link>
@@ -166,15 +166,15 @@
 
     <link name="foot_back">
         <inertial>
-            <origin rpy="0 0 0" xyz="0 0 0.3" />
+            <origin rpy="0 0 0" xyz="0 0 -0.6" />
             <mass value="0.3" />
-            <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+            <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05" />
         </inertial>
 
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0.3" />
             <geometry>
-                <cylinder length="0.6" radius="0.05" />
+                <cylinder length="0.6" radius="0.02" />
             </geometry>
             <material name="framemat0">
                 <color rgba="1 1 1 1" />
@@ -183,13 +183,13 @@
         <collision>
             <origin rpy="0 0 0" xyz="0 0 0.3" />
             <geometry>
-                <cylinder length="0.6" radius="0.05" />
+                <cylinder length="0.6" radius="0.02" />
             </geometry>
         </collision>
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0.6" />
             <geometry>
-                <sphere radius="0.05" />
+                <sphere radius="0.02" />
             </geometry>
             <material name="framemat0">
                 <color rgba="1 1 1 1" />
@@ -198,7 +198,7 @@
         <collision name ="foot_collision">
             <origin rpy="0 0 0" xyz="0 0 0.6" />
             <geometry>
-                <sphere radius="0.05" />
+                <sphere radius="0.02" />
             </geometry>
         </collision>
     </link>
@@ -208,21 +208,21 @@
         <child link="hip_back" />
         <origin rpy="0 0 0" xyz="0 0 0" />
         <axis xyz="0 0 1" />
-        <!-- <limit effort="10000" lower="-9" upper="9" velocity="100.0" /> -->
+        <limit effort="100" lower="-9" upper="9" velocity="3.0" />
     </joint>
     <joint name="leg_back_joint" type="continuous">
         <parent link="hip_back" />
         <child link="leg_back" />
         <origin rpy="0 3.1415 0" xyz="0 0 0" />
         <axis xyz="0 -1 0" />
-        <!-- <limit effort="10000" lower="-9" upper="9" velocity="100.0" /> -->
+        <limit effort="100" lower="-9" upper="9" velocity="3.0" />
     </joint>
     <joint name="foot_back_joint" type="prismatic">
         <parent link="leg_back" />
         <child link="foot_back" />
         <origin rpy="0 0 0" xyz="0 0 0.6" />
         <axis xyz="0 0 1" />
-        <limit effort="10000" lower="-1.2" upper="1.2" velocity="150.0" />
+        <limit effort="1000" lower="-1.0" upper="1.2" velocity="4" />
     </joint>
 
 
@@ -306,8 +306,8 @@
             <surface>
                 <friction>
                     <ode>
-                        <mu>0.9</mu>
-                        <mu2>0.9</mu2>
+                        <mu>0.99</mu>
+                        <mu2>0.99</mu2>
                     </ode>
                 </friction>
             </surface>
