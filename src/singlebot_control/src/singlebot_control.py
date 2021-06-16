@@ -12,6 +12,8 @@ from sensor_msgs.msg import JointState, Imu
 from gazebo_msgs.msg import ModelStates, ContactsState
 import rospy
 import roslib
+import json
+from copy import deepcopy
 roslib.load_manifest('singlebot_control')
 
 
@@ -68,6 +70,8 @@ class SpringLoadedInvertedPendulum():
         self.r0 = self.z_bottom + self.deltab
         print("r0 is ", self.r0 )
         self.leg_rest_length = 1.2
+
+        self.colllect_data = {'body_pos':[] ,'body_vel':[], 'body_ori':[] , 'body_ori_vel':[] , 'joint_pos':[] , 'joint_vel':[], 'joint_eff':[]}
 
     def calBodyVelocity(self):
         # self.vel.x = 0
@@ -132,7 +136,12 @@ class SpringLoadedInvertedPendulum():
         self.angular_velocity = data.angular_velocity
         self.linear_accelration = data.linear_acceleration
         self.performControl()
-        # print(self.phase)
+        self.collectState()
+
+        if len(self.colllect_data['body_pos']) > 1600:
+            with open('single_bot_data.json', 'w') as outfile:
+                json.dump(self.colllect_data, outfile)
+        print(self.phase)
 
     def subState(self, data):
         for i in range(len(data.name)):
@@ -210,6 +219,15 @@ class SpringLoadedInvertedPendulum():
         self.pubJointPos(self.joint_effort_desired[0], self.pub1)
         self.pubJointPos(self.joint_effort_desired[1], self.pub2)
         self.pubJointPos(self.joint_effort_desired[2], self.pub3)
+
+    def collectState(self):
+        self.colllect_data['body_pos'].append(deepcopy(self.pos))
+        self.colllect_data['body_vel'].append([self.vel.x,self.vel.y,self.vel.z])
+        self.colllect_data['body_ori'].append( [self.orientation.x,self.orientation.y,self.orientation.z,self.orientation.w ])
+        self.colllect_data['body_ori_vel'].append([self.angular_velocity.x, self.angular_velocity.y,self.angular_velocity.z])
+        self.colllect_data['joint_pos'].append(deepcopy(self.joint_position) )
+        self.colllect_data['joint_vel'].append(deepcopy(self.joint_velocity) )
+        self.colllect_data['joint_eff'].append(deepcopy(self.joint_effort_desired))
 
 
 if __name__ == '__main__':
