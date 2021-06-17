@@ -17,8 +17,8 @@ body_pos = val.body_pos(1:1400,:);
 
 figure
 hold on
-plot(body_pos(:,2))
-plot(body_pos(:,3))
+plot(times,body_pos(:,2))
+plot(times,body_pos(:,3))
 xlabel('time (s)')
 ylabel('position (m)')
 legend('y','z')
