@@ -12,6 +12,8 @@ from sensor_msgs.msg import JointState, Imu
 from gazebo_msgs.msg import ModelStates, ContactsState
 import rospy
 import roslib
+from copy import deepcopy
+import json
 roslib.load_manifest('singlebot_control')
 
 
@@ -24,7 +26,7 @@ class SpringLoadedInvertedPendulum():
         self.pos = [0, 0, 0]
         self.vel = Vector3()
         self.vel_desired = Vector3()
-        self.vel_desired.y = 3.141592*0.8
+        self.vel_desired.y = 2.51327412287
         self.orientation = nn.orientation
         self.orientation_desired = [0, 0, 0]
         self.angular_velocity = nn.angular_velocity
@@ -78,6 +80,8 @@ class SpringLoadedInvertedPendulum():
         print("r0 is ", self.r0)
         self.leg_rest_length = 1.2
 
+        self.colllect_data = {'body_pos':[] ,'body_vel':[], 'body_ori':[] , 'body_ori_vel':[] , 'joint_pos':[] , 'joint_vel':[], 'joint_eff':[]}
+
 
     def calTransformedAngle(self, jda):
         print("jda is ", jda)
@@ -115,6 +119,13 @@ class SpringLoadedInvertedPendulum():
         self.linear_accelration = data.linear_acceleration
         self.performControl()
         # print(self.phase)
+
+        self.collectState()
+
+        if len(self.colllect_data['body_pos']) > 400:
+            with open('single_bot_data.json', 'w') as outfile:
+                json.dump(self.colllect_data, outfile)
+        print(self.phase)
 
     def subState(self, data):
         for i in range(len(data.name)):
@@ -288,6 +299,16 @@ class SpringLoadedInvertedPendulum():
 
         print('current leg is ' ,self.leg)
 
+
+
+    def collectState(self):
+        self.colllect_data['body_pos'].append(deepcopy(self.pos))
+        self.colllect_data['body_vel'].append([self.vel.x,self.vel.y,self.vel.z])
+        self.colllect_data['body_ori'].append( [self.orientation.x,self.orientation.y,self.orientation.z,self.orientation.w ])
+        self.colllect_data['body_ori_vel'].append([self.angular_velocity.x, self.angular_velocity.y,self.angular_velocity.z])
+        self.colllect_data['joint_pos'].append(deepcopy(self.joint_position) )
+        self.colllect_data['joint_vel'].append(deepcopy(self.joint_velocity) )
+        self.colllect_data['joint_eff'].append(deepcopy(self.joint_effort_desired))
 
 def rad2up(ang):
     if ang < 0: 
